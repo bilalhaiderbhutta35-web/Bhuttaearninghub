@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Online Deals & Offers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        header {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: #1a237e;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ff6f00;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #e65100;
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #e0e0e0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Exclusive Deals & Top Recommendations</h1>
+        <p>Best products and offers handpicked for you</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <!-- Product Card 1 -->
+            <div class="card">
+                <h3>Product / Deal Title 1</h3>
+                <p>Is product ki short description yahan likhein.</p>
+                <a href="YOUR_AFFILIATE_OR_REFERRAL_LINK_HERE" target="_blank" class="btn">View Deal / Buy Now</a>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="card">
+                <h3>Product / Deal Title 2</h3>
+                <p>Is product ki short description yahan likhein.</p>
+                <a href="YOUR_AFFILIATE_OR_REFERRAL_LINK_HERE" target="_blank" class="btn">View Deal / Buy Now</a>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="card">
+                <h3>Product / Deal Title 3</h3>
+                <p>Is product ki short description yahan likhein.</p>
+                <a href="YOUR_AFFILIATE_OR_REFERRAL_LINK_HERE" target="_blank" class="btn">View Deal / Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 My Deals Website. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
