@@ -1,0 +1,428 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyEarn PK - Earn Money Online</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        easypaisa: '#00A859',
+                        jazzcash: '#ED1C24',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+        }
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="gradient-bg text-slate-100 min-h-screen font-sans antialiased pb-12">
+
+    <nav class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-bold text-slate-900 text-xl shadow-lg shadow-emerald-500/20">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <span class="font-extrabold text-xl bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">EasyEarn PK</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/20 font-semibold flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active Account
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 mt-6 space-y-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Balance Card -->
+            <div class="card-glass rounded-2xl p-6 relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
+                <p class="text-slate-400 text-sm font-medium">Available Balance</p>
+                <div class="flex items-baseline space-x-1 mt-2">
+                    <span class="text-2xl font-bold text-emerald-400">Rs.</span>
+                    <span id="userBalance" class="text-4xl font-extrabold text-white">0</span>
+                    <span class="text-xs text-slate-400 font-medium ml-1">PKR</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">Min. Withdraw: <span class="text-amber-400 font-semibold">Rs. 500</span></p>
+            </div>
+
+            <!-- Total Earnings Card -->
+            <div class="card-glass rounded-2xl p-6 relative overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                <p class="text-slate-400 text-sm font-medium">Total Earned</p>
+                <div class="flex items-baseline space-x-1 mt-2">
+                    <span class="text-2xl font-bold text-indigo-400">Rs.</span>
+                    <span id="totalEarned" class="text-4xl font-extrabold text-white">0</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">Lifetime earnings credited</p>
+            </div>
+
+            <!-- Tasks Completed Card -->
+            <div class="card-glass rounded-2xl p-6 relative overflow-hidden group hover:border-purple-500/40 transition-all duration-300">
+                <p class="text-slate-400 text-sm font-medium">Completed Tasks</p>
+                <div class="flex items-baseline space-x-1 mt-2">
+                    <span id="tasksCount" class="text-4xl font-extrabold text-white">0</span>
+                    <span class="text-sm text-slate-400">/ 10 Today</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">Resets every 24 hours</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Watch Ads Section -->
+                <div class="card-glass rounded-2xl p-6 border-l-4 border-l-emerald-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-play-circle text-emerald-400"></i> Watch Ads & Earn
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Watch a 10-second advertisement to earn instant reward</p>
+                        </div>
+                        <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-lg font-semibold">+ Rs. 10</span>
+                    </div>
+
+                    <div class="bg-slate-900/60 rounded-xl p-5 text-center border border-slate-800/80">
+                        <div id="adTimerBox" class="hidden my-3">
+                            <p class="text-slate-300 text-sm font-medium">Please wait while viewing ad...</p>
+                            <div class="text-3xl font-extrabold text-emerald-400 my-2" id="timerCount">10</div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden max-w-md mx-auto">
+                                <div id="timerProgress" class="bg-emerald-500 h-2 w-full transition-all duration-1000"></div>
+                            </div>
+                        </div>
+
+                        <div id="adReadyBox">
+                            <p class="text-slate-400 text-sm mb-4">Click below to start watching the sponsor ad.</p>
+                            <button id="watchAdBtn" onclick="startWatchAd()" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-emerald-500/25 transition-all transform active:scale-95 flex items-center justify-center gap-2 mx-auto">
+                                <i class="fa-solid fa-film"></i> Watch Sponsored Ad
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Tasks Section -->
+                <div class="card-glass rounded-2xl p-6">
+                    <h2 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-indigo-400"></i> Daily Simple Tasks
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">Complete small social media tasks to earn Rs. 20 each</p>
+
+                    <div class="space-y-3" id="tasksList">
+                        <!-- Task Item 1 -->
+                        <div id="task-1" class="flex items-center justify-between p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center text-lg">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Subscribe Official Channel</h4>
+                                    <p class="text-xs text-slate-400">Watch video & subscribe channel</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-emerald-400">+ Rs. 20</span>
+                                <button onclick="completeTask('task-1', 20)" class="px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition">Complete</button>
+                            </div>
+                        </div>
+
+                        <!-- Task Item 2 -->
+                        <div id="task-2" class="flex items-center justify-between p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-pink-500/10 text-pink-500 flex items-center justify-center text-lg">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Follow Instagram Page</h4>
+                                    <p class="text-xs text-slate-400">Follow for updates & screenshot</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-emerald-400">+ Rs. 20</span>
+                                <button onclick="completeTask('task-2', 20)" class="px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition">Complete</button>
+                            </div>
+                        </div>
+
+                        <!-- Task Item 3 -->
+                        <div id="task-3" class="flex items-center justify-between p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Visit Partner Website</h4>
+                                    <p class="text-xs text-slate-400">Browse website for 15 seconds</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-emerald-400">+ Rs. 20</span>
+                                <button onclick="completeTask('task-3', 20)" class="px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition">Complete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="space-y-6">
+                
+                <!-- Withdraw Request Form -->
+                <div class="card-glass rounded-2xl p-6">
+                    <h2 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-money-bill-transfer text-amber-400"></i> Withdraw Earnings
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">Transfer money directly to your account</p>
+
+                    <form id="withdrawForm" onsubmit="handleWithdraw(event)" class="space-y-4">
+                        <!-- Select Payment Method -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">Select Method</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="method" value="Easypaisa" class="peer hidden" checked>
+                                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-500/10 transition">
+                                        <span class="block text-xs font-bold text-emerald-400">Easypaisa</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="method" value="JazzCash" class="peer hidden">
+                                    <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center peer-checked:border-red-500 peer-checked:bg-red-500/10 transition">
+                                        <span class="block text-xs font-bold text-red-400">JazzCash</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Account Title -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Account Title</label>
+                            <input type="text" id="accTitle" required placeholder="e.g. Ali Raza" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+
+                        <!-- Account Number -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile / Account Number</label>
+                            <input type="text" id="accNumber" required placeholder="03XXXXXXXXX" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+
+                        <!-- Amount -->
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Amount (PKR)</label>
+                            <input type="number" id="withdrawAmount" required min="500" placeholder="Minimum Rs. 500" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+
+                        <!-- Notification Msg -->
+                        <div id="withdrawMsg" class="hidden text-xs p-3 rounded-xl"></div>
+
+                        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Withdrawals History -->
+                <div class="card-glass rounded-2xl p-6">
+                    <h3 class="text-sm font-bold text-white mb-3">Withdrawal History</h3>
+                    <div id="historyList" class="space-y-2 text-xs text-slate-400">
+                        <p id="emptyHistory" class="text-slate-500 text-center py-2">No withdrawal requests yet.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-glass rounded-2xl p-6 mt-8 border border-amber-500/20">
+            <h2 class="text-base font-bold text-amber-400 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb"></i> Admin Earning & Payment Guide (यह आपके लिए है)
+            </h2>
+            <div class="text-xs text-slate-300 space-y-2 leading-relaxed">
+                <p><strong>1. आप (Website Owner) पैसे कैसे कमाएंगे?</strong></p>
+                <ul class="list-disc pl-5 space-y-1 text-slate-400">
+                    <li>आप <strong class="text-white">Adsterra, Monetag,</strong> या <strong class="text-white">Google AdSense</strong> पर Publisher Account बनाएंगे।</li>
+                    <li>वे आपको Popunder, Direct Link, या Native Ads कोड देंगे।</li>
+                    <li>जब भी यूज़र "Watch Ad" पर क्लिक करेगा, आपका विज्ञापन खुलेगा और Ad Network आपको **$ (Dollars)** में भुगतान करेगा (e.g., $3 - $10 CPM)।</li>
+                </ul>
+                <p class="pt-2"><strong>2. आप यूज़र्स को पैसे (Easypaisa / JazzCash) कैसे देंगे?</strong></p>
+                <ul class="list-disc pl-5 space-y-1 text-slate-400">
+                    <li>Ad Networks से आपकी कमाई डॉलर में आपके बैंक अकाउंट या Payoneer में आएगी।</li>
+                    <li>यूज़र्स द्वारा भेजी गई Withdrawal Requests को आप देखकर उनके दिए गए Easypaisa/JazzCash नंबर पर मैन्युअल रूप से पैसे ट्रांसफर करेंगे।</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // State Management
+        let balance = 0;
+        let totalEarned = 0;
+        let tasksCompleted = 0;
+        let isAdWatching = false;
+
+        // Initialize state from LocalStorage if exists
+        window.onload = function() {
+            const savedBalance = localStorage.getItem('ee_balance');
+            const savedTotal = localStorage.getItem('ee_total');
+            const savedTasks = localStorage.getItem('ee_tasks');
+
+            if(savedBalance) balance = parseInt(savedBalance);
+            if(savedTotal) totalEarned = parseInt(savedTotal);
+            if(savedTasks) tasksCompleted = parseInt(savedTasks);
+
+            updateUI();
+        };
+
+        function updateUI() {
+            document.getElementById('userBalance').innerText = balance;
+            document.getElementById('totalEarned').innerText = totalEarned;
+            document.getElementById('tasksCount').innerText = tasksCompleted;
+
+            localStorage.setItem('ee_balance', balance);
+            localStorage.setItem('ee_total', totalEarned);
+            localStorage.setItem('ee_tasks', tasksCompleted);
+        }
+
+        // Watch Ads System with Timer
+        function startWatchAd() {
+            if(isAdWatching) return;
+            isAdWatching = true;
+
+            // Open Sponsor Ad link (Replace with your actual Adsterra Direct Link)
+            window.open('https://www.google.com', '_blank');
+
+            document.getElementById('adReadyBox').classList.add('hidden');
+            document.getElementById('adTimerBox').classList.remove('hidden');
+
+            let timeLeft = 10;
+            const timerCount = document.getElementById('timerCount');
+            const timerProgress = document.getElementById('timerProgress');
+
+            timerCount.innerText = timeLeft;
+            timerProgress.style.width = '100%';
+
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerCount.innerText = timeLeft;
+                timerProgress.style.width = (timeLeft * 10) + '%';
+
+                if(timeLeft <= 0) {
+                    clearInterval(interval);
+                    // Add Reward
+                    balance += 10;
+                    totalEarned += 10;
+                    tasksCompleted += 1;
+                    updateUI();
+
+                    // Reset UI
+                    document.getElementById('adTimerBox').classList.add('hidden');
+                    document.getElementById('adReadyBox').classList.remove('hidden');
+                    isAdWatching = false;
+
+                    alert("Success! Rs. 10 added to your balance.");
+                }
+            }, 1000);
+        }
+
+        // Complete Simple Tasks
+        function completeTask(taskId, reward) {
+            const taskElem = document.getElementById(taskId);
+            if(taskElem) {
+                // Open task URL
+                window.open('https://youtube.com', '_blank');
+
+                balance += reward;
+                totalEarned += reward;
+                tasksCompleted += 1;
+                updateUI();
+
+                // Disable completed task
+                taskElem.classList.add('opacity-50', 'pointer-events-none');
+                const btn = taskElem.querySelector('button');
+                btn.innerText = "Completed";
+                btn.classList.replace('bg-indigo-600', 'bg-slate-700');
+            }
+        }
+
+        // Handle Withdrawal Request Form
+        function handleWithdraw(event) {
+            event.preventDefault();
+
+            const method = document.querySelector('input[name="method"]:checked').value;
+            const title = document.getElementById('accTitle').value.trim();
+            const number = document.getElementById('accNumber').value.trim();
+            const amount = parseInt(document.getElementById('withdrawAmount').value);
+            const msgBox = document.getElementById('withdrawMsg');
+
+            msgBox.classList.remove('hidden', 'bg-red-500/10', 'text-red-400', 'bg-emerald-500/10', 'text-emerald-400');
+
+            if (amount < 500) {
+                msgBox.classList.add('bg-red-500/10', 'text-red-400');
+                msgBox.innerText = "Minimum withdrawal amount is Rs. 500";
+                return;
+            }
+
+            if (amount > balance) {
+                msgBox.classList.add('bg-red-500/10', 'text-red-400');
+                msgBox.innerText = "Insufficient balance in your wallet!";
+                return;
+            }
+
+            // Deduct balance
+            balance -= amount;
+            updateUI();
+
+            // Clear inputs
+            document.getElementById('withdrawForm').reset();
+
+            // Show Success Notification
+            msgBox.classList.add('bg-emerald-500/10', 'text-emerald-400');
+            msgBox.innerText = `Withdrawal request of Rs. ${amount} submitted successfully via ${method}.`;
+
+            // Append to history
+            const historyList = document.getElementById('historyList');
+            const emptyHist = document.getElementById('emptyHistory');
+            if(emptyHist) emptyHist.remove();
+
+            const historyItem = document.createElement('div');
+            historyItem.className = "flex justify-between items-center p-2.5 rounded-lg bg-slate-900/60 border border-slate-800";
+            historyItem.innerHTML = `
+                <div>
+                    <span class="font-bold text-white">${method}</span> (${number})
+                    <p class="text-[10px] text-slate-500">${title}</p>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-amber-400">Rs. ${amount}</span>
+                    <span class="block text-[10px] text-emerald-400">Pending</span>
+                </div>
+            `;
+            historyList.prepend(historyItem);
+        }
+    </script>
+</body>
+</html>
+```
